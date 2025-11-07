@@ -1,0 +1,8 @@
+b7af0da Remove env files and ignore them
+57831fd final phase
+3db61ce Merge pull request #2 from taufeeq31/dashboard
+4b1894e dashboard and UI
+300922d frontend work
+8c2547a Merge pull request #1 from taufeeq31/auth
+8c575d2 Auth and Routes Setup
+137a913 initial commit
