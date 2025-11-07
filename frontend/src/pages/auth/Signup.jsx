@@ -57,10 +57,10 @@ export default function Signup() {
             <div className="hidden lg:flex lg:w-1/2 bg-[#0B1930] text-white items-center justify-center p-12">
                 <div>
                     <h1 className="text-4xl font-semibold mb-4 tracking-tight">
-                        Sapphire Nightfall
+                        Task Management Made Easy
                     </h1>
                     <p className="text-sm opacity-80 max-w-sm leading-6">
-                        A calm entry point with disciplined contrast and restrained color.
+                        Join our community of productive individuals and take control of your tasks
                     </p>
                 </div>
             </div>

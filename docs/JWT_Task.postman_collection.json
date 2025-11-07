@@ -1,0 +1,174 @@
+{
+    "info": {
+        "name": "JWT_Task API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": "Postman collection for JWT_Task backend"
+    },
+    "item": [
+        {
+            "name": "Auth",
+            "item": [
+                {
+                    "name": "Signup",
+                    "request": {
+                        "method": "POST",
+                        "header": [{ "key": "Content-Type", "value": "application/json" }],
+                        "url": {
+                            "raw": "{{baseUrl}}/auth/signup",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["auth", "signup"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"secret123\"\n}"
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "try {",
+                                    "  const json = pm.response.json();",
+                                    "  if (json.token) pm.collectionVariables.set('token', json.token);",
+                                    "} catch (e) {}"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Login",
+                    "request": {
+                        "method": "POST",
+                        "header": [{ "key": "Content-Type", "value": "application/json" }],
+                        "url": {
+                            "raw": "{{baseUrl}}/auth/login",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["auth", "login"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"secret123\"\n}"
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "try {",
+                                    "  const json = pm.response.json();",
+                                    "  if (json.token) pm.collectionVariables.set('token', json.token);",
+                                    "} catch (e) {}"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "User",
+            "item": [
+                {
+                    "name": "Me",
+                    "request": {
+                        "method": "GET",
+                        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+                        "url": {
+                            "raw": "{{baseUrl}}/user/me",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["user", "me"]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Tasks",
+            "item": [
+                {
+                    "name": "Create Task",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Authorization", "value": "Bearer {{token}}" },
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/tasks",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["tasks"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"title\": \"Buy milk\",\n  \"description\": \"2% organic\"\n}"
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "try {",
+                                    "  const json = pm.response.json();",
+                                    "  if (json._id) pm.collectionVariables.set('taskId', json._id);",
+                                    "} catch (e) {}"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Tasks",
+                    "request": {
+                        "method": "GET",
+                        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+                        "url": {
+                            "raw": "{{baseUrl}}/tasks",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["tasks"]
+                        }
+                    }
+                },
+                {
+                    "name": "Update Task",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            { "key": "Authorization", "value": "Bearer {{token}}" },
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/tasks/{{taskId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["tasks", "{{taskId}}"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"title\": \"Buy bread\",\n  \"completed\": true\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Task",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+                        "url": {
+                            "raw": "{{baseUrl}}/tasks/{{taskId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["tasks", "{{taskId}}"]
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "variable": [
+        { "key": "baseUrl", "value": "http://localhost:5001/api" },
+        { "key": "token", "value": "" },
+        { "key": "taskId", "value": "" }
+    ]
+}
